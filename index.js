@@ -143,7 +143,7 @@ app.use((req, res, next) => {
     .status(404)
     .json({
       status: false,
-      msg: "Visits https://github.com/Armanidrisi/Mailer For More Info\nBy Relix",
+      msg: "Visits https://github.com/Armanidrisi/Mailer For More Info By Relix",
     });
 });
 app.listen(5000, () => console.log("API listening on port 5000"));
