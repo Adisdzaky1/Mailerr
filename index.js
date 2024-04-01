@@ -94,7 +94,7 @@ app.get('/cecan/indonesia', async (req, res) => {
 })
 app.get('/api/tinyurl', async (req, res) => {
     
-    var url = req.query.url
+    const url = req.query.url
 
      if (!url) return res.json({
         status: false,
@@ -110,7 +110,7 @@ app.get('/api/tinyurl', async (req, res) => {
                  result : {
                      link : `${body}`,
                  },
-                 message : `jangan lupa follow ${creator}`
+                 message : `jangan lupa follow`
              })
          } catch (e) {
              console.log('Error :', color(e,'red'))
