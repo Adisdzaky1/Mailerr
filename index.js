@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
+const request = require("request")
 const app = express();
 const scr = require('@bochilteam/scraper')
 const router = express.Router();
@@ -90,6 +91,28 @@ app.get('/cecan/indonesia', async (req, res) => {
         res.send(body);
     });
     
+})
+app.get('/api/tinyurl', async (req, res) => {
+    
+    var url = req.query.url
+
+     if (!url) return res.json(loghandler.noturl)
+
+     request(`https://tinyurl.com/api-create.php?url=${url}`, function (error, response, body) {
+         try {
+             res.json({
+                 status : true,
+                 creator : `RelixOfficial`,
+                 result : {
+                     link : `${body}`,
+                 },
+                 message : `jangan lupa follow ${creator}`
+             })
+         } catch (e) {
+             console.log('Error :', color(e,'red'))
+             res.json(loghandler.invalidlink)
+         }
+     })
 })
 app.use((req, res, next) => {
   res
