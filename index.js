@@ -99,7 +99,7 @@ app.get('/api/kbbi', async (req, res) => {
     
     if (!text) return res.json({
         status: false,
-        creator: `${creator}`,
+        creator: `RelixOfficial`,
         message: "masukan parameter kata"
     })
     fetch(encodeURI(`https://kbbi-api-zhirrr.vercel.app/api/kbbi?text=${text}`))
@@ -120,8 +120,8 @@ app.get('/api/tinyurl', async (req, res) => {
     const url = req.query.url
     if (!url) return res.json({
         status: false,
-        creator: `${creator}`,
-        message: "masukan parameter ur"
+        creator: `RelixOfficial`,
+        message: "masukan parameter url"
     })
     fetch(encodeURI(`https://tinyurl.com/api-create.php?url=${url}`))
         .then(response => response.json())
