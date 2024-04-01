@@ -92,32 +92,51 @@ app.get('/cecan/indonesia', async (req, res) => {
     });
     
 })
-app.get('/api/tinyurl', async (req, res) => {
+app.get('/api/kbbi', async (req, res) => {
     
-    const url = req.query.url
-
-     if (!url) return res.json({
+    var text = req.query.kata
+    
+    if (!text) return res.json({
         status: false,
-        creator: `RelixOfficial`,
-        message: "masukan parameter url"
+        creator: `${creator}`,
+        message: "masukan parameter kata"
     })
-
-     request(`https://tinyurl.com/api-create.php?url=${url}`, function (error, response, body) {
-         try {
-             res.json({
-                 status : true,
-                 creator : `RelixOfficial`,
-                 result : {
-                     link : `${body}`,
-                 },
-                 message : `jangan lupa follow`
-             })
-         } catch (e) {
-             console.log('Error :', color(e,'red'))
-             res.json(loghandler.invalidlink)
-         }
-     })
+    fetch(encodeURI(`https://kbbi-api-zhirrr.vercel.app/api/kbbi?text=${text}`))
+        .then(response => response.json())
+        .then(data => {
+            var result = data;
+            res.json({
+                result
+            })
+        })
+        .catch(e => {
+            console.log(e);
+            res.json(loghandler.error)
+        })
+    
 })
+app.get('/api/tinyurl', async (req, res) => {
+    const url = req.query.url
+    if (!url) return res.json({
+        status: false,
+        creator: `${creator}`,
+        message: "masukan parameter ur"
+    })
+    fetch(encodeURI(`https://tinyurl.com/api-create.php?url=${url}`))
+        .then(response => response.json())
+        .then(data => {
+            var result = data;
+            res.json({
+                result
+            })
+        })
+        .catch(e => {
+            console.log(e);
+            res.json(loghandler.error)
+        })
+    
+})
+
 app.use((req, res, next) => {
   res
     .status(404)
