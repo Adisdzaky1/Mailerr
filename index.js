@@ -44,7 +44,7 @@ app.post("/api/mail", (req, res) => {
     text: mailbody,
   });
 });
-router.get('/api/ytmp4', async (req, res, next) => {
+app.get('/api/ytmp4', async (req, res) => {
     const url = req.query.url
     if (!url) return res.json({
         status: false,
@@ -81,7 +81,7 @@ app.use((req, res, next) => {
     .status(404)
     .json({
       status: false,
-      msg: "Visit https://github.com/Armanidrisi/Mailer For More Info",
+      msg: "Visits335 https://github.com/Armanidrisi/Mailer For More Info",
     });
 });
 app.listen(5000, () => console.log("API listening on port 5000"));
