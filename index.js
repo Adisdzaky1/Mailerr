@@ -141,7 +141,11 @@ app.get('/api/tinyurl2', async (req, res) => {
     
     var url = req.query.url
 
-     if (!url) return res.json(loghandler.noturl)
+     if (!url) return res.json({
+        status: false,
+        creator: `RelixOfficial`,
+        message: "masukan parameter url"
+    })
 
      request(`https://tinyurl.com/api-create.php?url=${url}`, function (error, response, body) {
          try {
