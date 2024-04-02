@@ -163,6 +163,21 @@ app.get('/api/tinyurl2', async (req, res) => {
          }
      })
 })
+app.get('/api/yt-short', async (req, res, next) => {
+  const url = req.query.url
+  if (!url) return res.json(msg.paramurl)
+
+  xcode = await fetchJson(`https://api-xcoders.site/api/download/yt-short?url=${url}&apikey=Frieren`)
+  let result = xcode.result
+  if (!result) res.json(msg.nodata)
+  res.json({
+    status: "Success",
+    code: 200,
+    author: "RelixOfficial",
+    data: result
+  })
+ 
+})
 app.use((req, res, next) => {
   res
     .status(404)
