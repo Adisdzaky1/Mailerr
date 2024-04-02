@@ -1,4 +1,3 @@
-require("./settings")
 msg = {
     paramkey: {
     	status: "Terjadi Kesalahan",
