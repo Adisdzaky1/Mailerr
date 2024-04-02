@@ -120,27 +120,7 @@ app.get('/api/kbbi', async (req, res) => {
         })
     
 })
-app.get('/api/tinyurl', async (req, res) => {
-    const url = req.query.url
-    if (!url) return res.json({
-        status: false,
-        creator: `RelixOfficial`,
-        message: "masukan parameter url"
-    })
-    fetch(encodeURI(`https://tinyurl.com/api-create.php?url=${url}`))
-        .then(response => response.json())
-        .then(data => {
-            var result = data;
-            res.json({
-                result
-            })
-        })
-        .catch(e => {
-            console.log(e);
-            res.json(loghandler.error)
-        })
-    
-})
+
 app.get('/api/tinyurl2', async (req, res) => {
     
     var url2 = req.query.url
@@ -169,11 +149,19 @@ app.get('/api/tinyurl2', async (req, res) => {
 })
 app.get('/api/yt-short', async (req, res, next) => {
   const url = req.query.url
-  if (!url) return res.json(msg.paramurl)
+  if (!url) return res.json({
+    status: false,
+    author: "RelixOfficial",
+    message: "Masukan Url"
+  })
 
   xcode = await fetchJson(`https://api-xcoders.site/api/download/yt-short?url=${url}&apikey=Frieren`)
   let result = xcode.result
-  if (!result) res.json(msg.nodata)
+  if (!result) res.json({
+    status: false,
+    author: "RelixOfficial",
+    message: "ErrorTidak Ada Vidio"
+  })
   res.json({
     status: "Success",
     code: 200,
