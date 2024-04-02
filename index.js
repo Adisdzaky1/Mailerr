@@ -143,7 +143,7 @@ app.get('/api/tinyurl2', async (req, res) => {
          }
      })
 })
-app.get('/api/yt-short', async (req, res, next) => {
+app.get('/api/yt-short', async (req, res) => {
   const url = req.query.url
   if (!url) return res.json({
     status: false,
