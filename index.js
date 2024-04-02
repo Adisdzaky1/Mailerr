@@ -1,4 +1,4 @@
-require('../message');
+require('../message.js');
 
 __path = process.cwd();
 
