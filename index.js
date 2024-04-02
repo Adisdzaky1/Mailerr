@@ -1,6 +1,6 @@
 require('../message.js');
 
-__path = process.cwd();
+
 
 const express = require("express");
 const fetch = require('node-fetch');
