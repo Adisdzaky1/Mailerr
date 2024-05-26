@@ -19,8 +19,8 @@ app.post("/api/mail", (req, res) => {
   const mailbody = req.body.message;
   const sendEmail = async (mailDetails) => {
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
+      host: "smtp.elasticemail.com",
+      port: 2525,
       auth: {
         user: sender,
         pass: pass,
