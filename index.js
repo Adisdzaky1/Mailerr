@@ -12,17 +12,16 @@ app.use(cors())
 app.use(bodyParser.json());
 
 
-app.get('/api/ai', async (req, res) => {
-var input = req.query.text
+app.post('/api/ai', async (req, res) => {
+    var input = req.query.text
+    const model = '@cf/openchat/openchat-3.5-0106';
+    const API = 'DR6F2O3GnI3KRyn58LpRFpgnPrnMVgkG2eizO8R7';
     
 async function run(input) {
-    const model = '@cf/openchat/openchat-3.5-0106';
-    const API_TOKEN = 'DR6F2O3GnI3KRyn58LpRFpgnPrnMVgkG2eizO8R7';
-
     const response = await fetch(
     `https://api.cloudflare.com/client/v4/accounts/2776c1a12d86d8b316a5232ccb9fda85/ai/run/${model}`,
     {
-      headers: { Authorization: `Bearer ${API_TOKEN}` },
+      headers: { Authorization: `Bearer ${API}` },
       method: "POST",
       body: JSON.stringify(input),
     }
