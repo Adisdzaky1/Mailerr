@@ -12,7 +12,7 @@ app.use(cors())
 app.use(bodyParser.json());
 
 
-app.post('/api/ai', async (req, res) => {
+app.get('/api/ai', async (req, res) => {
     var input = req.query.text
     const model = '@cf/openchat/openchat-3.5-0106';
     const API = 'DR6F2O3GnI3KRyn58LpRFpgnPrnMVgkG2eizO8R7';
@@ -50,7 +50,7 @@ run("@cf/meta/llama-2-7b-chat-int8", {
         })
         .catch(e => {
             console.log(e);
-            res.json(loghandler.error)
+            res.json(response)
         })
 });
 )}
