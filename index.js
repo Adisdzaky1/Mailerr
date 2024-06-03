@@ -11,6 +11,51 @@ const router = express.Router();
 app.use(cors())
 app.use(bodyParser.json());
 
+
+app.get('/api/ai', async (req, res) => {
+var input = req.query.text
+    
+async function run(input) {
+    const model = '@cf/openchat/openchat-3.5-0106';
+    const API_TOKEN = 'DR6F2O3GnI3KRyn58LpRFpgnPrnMVgkG2eizO8R7';
+
+    const response = await fetch(
+    `https://api.cloudflare.com/client/v4/accounts/2776c1a12d86d8b316a5232ccb9fda85/ai/run/${model}`,
+    {
+      headers: { Authorization: `Bearer ${API_TOKEN}` },
+      method: "POST",
+      body: JSON.stringify(input),
+    }
+  );
+  const result = await response.json();
+  return result;
+}
+run("@cf/meta/llama-2-7b-chat-int8", {
+  messages: [
+    {
+      role: "system",
+      content: "You are a friendly assistan that helps write stories",
+    },
+    {
+      role: "user",
+      content:
+        "Write a short story about a llama that goes on a journey to find an orange cloud ",
+    },
+  ],
+}).then(response => response.json())
+        .then(data => {
+            var result = data;
+            res.json({
+                result
+            })
+        })
+        .catch(e => {
+            console.log(e);
+            res.json(loghandler.error)
+        })
+});
+)}
+
 app.post("/api/mail", (req, res) => {
   const sender = req.body.sender;
   const pass = req.body.password;
